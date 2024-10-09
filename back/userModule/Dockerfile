@@ -6,4 +6,4 @@ CMD ["--server.port=9601"]
 
 EXPOSE 9601
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/userModule.jar"]
