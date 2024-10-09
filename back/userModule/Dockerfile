@@ -1,4 +1,4 @@
-FROM jdk:17
+FROM openjdk:17
 MAINTAINER gengjiale
 COPY *.jar /userModule.jar
 
