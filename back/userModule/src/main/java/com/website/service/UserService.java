@@ -11,4 +11,8 @@ public class UserService {
         userInfo.setId(id);
         return userInfo;
     }
+
+    public String getUserName(int id){
+        return "testName";
+    }
 }

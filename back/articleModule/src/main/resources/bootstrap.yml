@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: article
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.96.179.141:8848
