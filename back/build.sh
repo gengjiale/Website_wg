@@ -1,12 +1,18 @@
 #!/bin/sh
 
-# 获取当前路径
-if [ -z "$BASE_DIR" ]; then
-	BASE_DIR=${0%/*}
-fi
-pwd
-ls $BASE_DIR
-echo $BASE_DIR
+#
+jenkins_home=/var/jenkins_home
+
+cd $jenkins_home/workspace
+ls
+
+# 获取当前路径 /var/jenkins_home/workspace/usst_website/back
+#if [ -z "$BASE_DIR" ]; then
+#	BASE_DIR=${0%/*}
+#fi
+
+
+
 #export DATA_DIR=${BASE_DIR}/datadir
 #export CONF_DIR=${BASE_DIR}
 #

@@ -27,7 +27,7 @@ services:
       - mysql
       -
   nginx:
-    image: nginx:1.23.4
+    image: nginx:1.27.0
     container_name: haha_nginx
     restart: always
     volumes:
