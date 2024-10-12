@@ -1,10 +1,14 @@
 #!/bin/sh
 
-#
 jenkins_home=/var/jenkins_home
 
-cd $jenkins_home/workspace
-ls
+# 创建
+if [ ! -e volumes/usst_website ]; then
+  mkdir -p volumes/usst_website
+fi
+# shellcheck disable=SC2164
+#cd $jenkins_home/workspace
+#ls
 
 # 获取当前路径 /var/jenkins_home/workspace/usst_website/back
 #if [ -z "$BASE_DIR" ]; then
