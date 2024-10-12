@@ -12,8 +12,8 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - usst_website_user
-      - usst_website_article
+      - userModule
+      - articleModule
 
   userModule:
     image: usst-website/user:latest
@@ -24,8 +24,8 @@ services:
     expose:
       - 8081
     depends_on:
-      - usst_website_nacos
-      - usst_website_mysql
+      - nacos
+      - mysql
 
   articleModule:
     image: usst-website/article:latest
@@ -36,8 +36,8 @@ services:
     expose:
       - 8082
     depends_on:
-      - usst_website_nacos
-      - usst_website_mysql
+      - nacos
+      - mysql
 
   nacos:
     image: nacos/nacos-server:v2.3.2
