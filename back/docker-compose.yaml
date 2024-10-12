@@ -48,6 +48,7 @@ services:
       - nacos_mysql.env
     volumes:
       - /root/jenkins/jenkins_home/volumes/usst_website/nacos/logs:/home/nacos/logs
+      - /root/jenkins/jenkins_home/volumes/usst_website/nacos/conf:/home/nacos/conf
     expose:
       - 8848
       - 9848
