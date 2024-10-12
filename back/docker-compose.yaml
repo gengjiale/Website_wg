@@ -68,7 +68,7 @@ services:
     expose:
       - 3306
     volumes:
-      - /root/jenkins/volumes/usst_website/mysql/data:/var/lib/mysql
+      - /root/jenkins/jenkins_home/volumes/usst_website/mysql/data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       interval: 5s
