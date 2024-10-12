@@ -1,139 +1,79 @@
 version: '3'
 services:
+  nginx:
+    image: nginx:1.27.0
+    container_name: usst_website_nginx
+    restart: always
+    volumes:
+      - $usst_website_volumes/nginx/etc/nginx:/etc/nginx
+      - $usst_website_volumes/usr/share/nginx:/usr/share/nginx
+    networks:
+      - navsmart_network
+    ports:
+      - "8080:80"
+    depends_on:
+      - usst_website_user
+      - usst_website_article
+
   userModule:
     image: website/user:latest
-    container_name: user
+    container_name: usst_website_user
     restart: always
     networks:
       - website_network
     expose:
       - 8081
     depends_on:
-      - nginx
-      - nacos
-      - mysql
+      - usst_website_nacos
+      - usst_website_mysql
 
   articleModule:
     image: website/article:latest
-    container_name: article
+    container_name: usst_website_article
     restart: always
     networks:
       - website_network
     expose:
       - 8082
     depends_on:
-      - nginx
-      - nacos
-      - mysql
-      -
-  nginx:
-    image: nginx:1.27.0
-    container_name: haha_nginx
-    restart: always
-    volumes:
-      - ${CONF_DIR:-.}/nginx-navsmart.conf:/etc/nginx/conf.d/default.conf:ro # 映射nginx中关于项目的server配置文件
-      - ${CONF_DIR:-.}/app/dist:/srv/app/view:ro # html页面的资源文件
-    # network_mode: "host"
-    networks:
-      - navsmart_network
-    ports:
-      - "8081:81"
-    depends_on:
-      - navsmart-server
-
-  mysql:
-    image: mysql
+      - usst_website_nacos
+      - usst_website_mysql
 
   nacos:
-    image: nacos
-
-
-
-  elasticsearch:
-    image: elasticsearch:8.5.0
-    container_name: es
-    restart: always
-    environment:
-      - "cluster.name=es" # 节点名
-      - "discovery.type=single-node" # 单节点模式
-      - "ES_JAVA_OPTS=-Xms512m -Xmx1024m" # 指定es运行的java配置，防止服务器扛不住
-      - xpack.security.enabled=false # 关闭认证
-      - network.host=0.0.0.0 # 接受任何来源的请求
-    ports:
-      - 9200:9200
-    volumes:
-      - ${CONF_DIR:-.}/es-plugins:/usr/share/elasticsearch/plugins:ro # 配置es默认的ik分词器
-    networks:
-      navsmart_network:
-        aliases:
-          - es
-
-  logstash:
-    image: logstash:8.6.2
-    container_name: logstash-8.6.2
-    restart: always
-    command: logstash -f /usr/share/logstash/pipeline/logstash.conf
-    volumes:
-      - ${CONF_DIR:-.}/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro # 配置数据同步的
-      - ${CONF_DIR:-.}/logstash-template.json:/usr/share/logstash/pipeline/es-template.json:ro # 配置建表的模板
-      - ${CONF_DIR:-.}/mariadb-java-client-3.0.6.jar:/usr/share/logstash/mariadb-java-client-3.0.6.jar:ro # mariadb的驱动
-    # ports:
-    #   - 5044:5044
-    #   - 9600:9600
+    image: nacos/nacos-server:v2.3.2
+    container_name: usst_website_nacos
     networks:
       - navsmart_network
+    env_file:
+      - nacos_mysql.env
+    volumes:
+      - $usst_website_volumes/nacos/logs:/home/nacos/logs
+    expose:
+      - 8848
+      - 9848
+      - 9849
     depends_on:
-      - elasticsearch
-
-  mariadb:
-    image: mariadb:10.6
-    container_name: mariadb-10.6
+      - mysql
     restart: always
-    environment:
-      - MARIADB_ROOT_PASSWORD=123456
-      - MARIADB_USER=nav_dev@% # 会自动拥有 MARIADB_DATABASE 下的全部权限
-      - MARIADB_PASSWORD=123456
-      - MARIADB_DATABASE=nav_dev # 启动自动创建 nav_dev database
-    volumes:
-      - ${DATA_DIR:-./datadir}/mariadb-data:/var/lib/mysql:rw # 将容器内数据持久化到磁盘上
-    ports:
-      - "3306:3306"
-    networks:
-      navsmart_network:
-        aliases:
-          - mariadb
 
-  mongodb:
-    image: mongo:4
-    container_name: mongodb-4
-    restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=123456
-    ports:
-      - "27017:27017"
+  mysql:
+    image: mysql:8.4.2
+    container_name: usst_website_mysql
     networks:
-      navsmart_network:
-        aliases:
-          - mongodb
+      - navsmart_network
+    build:
+      dockerfile: mysql_dockerfile
+    env_file:
+      - mysql.env
+    expose:
+      - 3306
     volumes:
-      - ${DATA_DIR:-./datadir}/mongodb-data:/data/db:rw # 将容器内数据持久化到磁盘上
-
-  navsmart-server:
-    image: eclipse-temurin:17
-    command: "bash -c 'cd /opt/app && java -jar /opt/app/navsmart.jar'"
-    container_name: navsmart-server
-    restart: always
-    volumes:
-      - ${CONF_DIR:-.}/app/server:/opt/app:rw # jar包执行和打印日志文件
-    networks:
-      navsmart_network:
-        aliases:
-          - server
-    depends_on:
-      - elasticsearch
-      - mongodb
-      - mariadb
+      - $usst_website_volumes/mysql/data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
 
 networks:
   website_network:
