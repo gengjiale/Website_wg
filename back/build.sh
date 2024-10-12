@@ -2,6 +2,7 @@
 
 jenkins_home=/var/jenkins_home
 
+cd $jenkins_home
 # 创建
 if [ ! -e volumes/usst_website ]; then
   mkdir -p volumes/usst_website
