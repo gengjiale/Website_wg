@@ -5,8 +5,8 @@ services:
     container_name: usst_website_nginx
     restart: always
     volumes:
-      - /var/jenkins_home/volumes/usst_website/nginx/etc/nginx:/etc/nginx
-      - /var/jenkins_home/volumes/usst_website/nginx/usr/share/nginx:/usr/share/nginx
+      - /root/jenkins/jenkins_home/volumes/usst_website/nginx/etc/nginx:/etc/nginx
+      - /root/jenkins/jenkins_home/volumes/usst_website/nginx/usr/share/nginx:/usr/share/nginx
     networks:
       - website_network
     ports:
@@ -47,7 +47,7 @@ services:
     env_file:
       - nacos_mysql.env
     volumes:
-      - /var/jenkins_home/volumes/usst_website/nacos/logs:/home/nacos/logs
+      - /root/jenkins/jenkins_home/volumes/usst_website/nacos/logs:/home/nacos/logs
     expose:
       - 8848
       - 9848
@@ -68,7 +68,7 @@ services:
     expose:
       - 3306
     volumes:
-      - /var/jenkins_home/volumes/usst_website/mysql/data:/var/lib/mysql
+      - /root/jenkins/volumes/usst_website/mysql/data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       interval: 5s
