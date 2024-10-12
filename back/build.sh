@@ -4,7 +4,7 @@
 if [ -z "$BASE_DIR" ]; then
 	BASE_DIR=${0%/*}
 fi
-
+pwd
 ls $BASE_DIR
 echo $BASE_DIR
 #export DATA_DIR=${BASE_DIR}/datadir
