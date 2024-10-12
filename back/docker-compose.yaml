@@ -61,8 +61,6 @@ services:
     container_name: usst_website_mysql
     networks:
       - website_network
-    build:
-      dockerfile: mysql_dockerfile
     env_file:
       - mysql.env
     expose:
