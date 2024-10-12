@@ -8,7 +8,7 @@ services:
       - /var/jenkins_home/volumes/usst_website/nginx/etc/nginx:/etc/nginx
       - /var/jenkins_home/volumes/usst_website/nginx/usr/share/nginx:/usr/share/nginx
     networks:
-      - navsmart_network
+      - website_network
     ports:
       - "8080:80"
     depends_on:
@@ -43,7 +43,7 @@ services:
     image: nacos/nacos-server:v2.3.2
     container_name: usst_website_nacos
     networks:
-      - navsmart_network
+      - website_network
     env_file:
       - nacos_mysql.env
     volumes:
@@ -60,7 +60,7 @@ services:
     image: mysql:8.4.2
     container_name: usst_website_mysql
     networks:
-      - navsmart_network
+      - website_network
     build:
       dockerfile: mysql_dockerfile
     env_file:
