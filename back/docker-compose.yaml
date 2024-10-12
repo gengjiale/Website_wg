@@ -16,7 +16,7 @@ services:
       - usst_website_article
 
   userModule:
-    image: website/user:latest
+    image: usst-website/user:latest
     container_name: usst_website_user
     restart: always
     networks:
@@ -28,7 +28,7 @@ services:
       - usst_website_mysql
 
   articleModule:
-    image: website/article:latest
+    image: usst-website/article:latest
     container_name: usst_website_article
     restart: always
     networks:
