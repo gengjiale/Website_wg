@@ -1,8 +1,20 @@
+**/target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
 .idea/
 *.iml
 *.iws
 *.ipr
+*.ser
 
-**/target/
+### VS Code ###
+.vscode/
 
-!**/src/main/
+### NetBeans ###
+**/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+
