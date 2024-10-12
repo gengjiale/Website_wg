@@ -4,4 +4,4 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 47.96.179.141:8848
+        server-addr: http://nacos:8848
