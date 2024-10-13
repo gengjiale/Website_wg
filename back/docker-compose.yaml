@@ -44,8 +44,19 @@ services:
     container_name: usst_website_nacos
     networks:
       - website_network
-    env_file:
-      - nacos_mysql.env
+    environment:
+      - PREFER_HOST_MODE=hostname
+        MODE=standalone
+        SPRING_DATASOURCE_PLATFORM=mysql
+        MYSQL_SERVICE_HOST=mysql
+        MYSQL_SERVICE_DB_NAME=nacos
+        MYSQL_SERVICE_PORT=3306
+        MYSQL_SERVICE_USER=nacos
+        MYSQL_SERVICE_PASSWORD=nacos
+        MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        NACOS_AUTH_IDENTITY_KEY=2222
+        NACOS_AUTH_IDENTITY_VALUE=2xxx
+        NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
     volumes:
       - /root/jenkins/jenkins_home/volumes/usst_website/nacos/logs:/home/nacos/logs
       - /root/jenkins/jenkins_home/volumes/usst_website/nacos/conf:/home/nacos/conf
@@ -63,8 +74,12 @@ services:
     container_name: usst_website_mysql
     networks:
       - website_network
-    env_file:
-      - mysql.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=nacos
+      - MYSQL_USER=nacos
+      - MYSQL_PASSWORD=nacos
+      - LANG=C.UTF-8
     expose:
       - 3306
     volumes:
