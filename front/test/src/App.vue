@@ -1,5 +1,23 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue' 
+import request from './utils/request';
+import { ref } from 'vue'
+function testRemote(){
+  request({
+    method: 'GET',
+    url: '/api/v1/test'
+  }).then(res=>{
+    console.log(res)
+    msg.value(res.data)
+  })
+}
+const msg = ref("我细化你");
+// axios.get('/api/v1/user').then(res=>{
+//   console.log(res)
+//   msg = res
+// })
+
+
 </script>
 
 <template>
@@ -11,7 +29,8 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <HelloWorld :msg="msg" />
+  <button @click="testRemote">测试后端数据访问</button>
 </template>
 
 <style scoped>
