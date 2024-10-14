@@ -8,7 +8,7 @@ function testRemote(){
     url: '/api/v1/test'
   }).then(res=>{
     console.log(res)
-    msg = res.data
+    msg.value = res.data
   })
 }
 const msg = ref("我细化你");
