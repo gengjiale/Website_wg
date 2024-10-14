@@ -5,8 +5,6 @@
 1）back
 该文件夹用于放后端代码，详细信息请阅读back文件夹下的readme
 ① 文件
-mysql.env(已废弃)：mysql的配置文件
-nacos_mysql.env(已废弃)：mysql中nacos的配置文件
 docker-compose.yaml：docker容器配置文件
 ② 文件夹 （功能模块）
 userModule：用户模块
