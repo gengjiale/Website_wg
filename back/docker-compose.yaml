@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - /root/jenkins/jenkins_home/volumes/usst_website/nginx/etc/nginx:/etc/nginx
-      # - /root/jenkins/jenkins_home/volumes/usst_website/nginx/usr/share/nginx:/usr/share/nginx
+      - /root/jenkins/jenkins_home/volumes/usst_website/nginx/usr/share/nginx:/usr/share/nginx
     networks:
       - website_network
     ports:
