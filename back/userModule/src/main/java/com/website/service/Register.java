@@ -4,12 +4,10 @@ import com.website.dto.UserInfo;
 
 public class Register {
 
-    public UserInfo registerByNP(String name, String password){
-        UserInfo userInfo = new UserInfo();
-        userInfo.setName(name);
-        return  userInfo;
+    public UserInfo register1(UserInfo userInfo_request){
+        return  userInfo_request;
     }
-    public UserInfo registerByTU(String type, String unionid){
+    public UserInfo register2(String type, String unionid, UserInfo userInfo_request){
         UserInfo userInfo = new UserInfo();
         userInfo.setName(type);
         return userInfo;
