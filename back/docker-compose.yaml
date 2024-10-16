@@ -14,8 +14,9 @@ services:
     depends_on:
       - userModule
       - articleModule
+      - agentModule
 
-  agent:
+  agentModule:
     image: usst-website/agent:latest
     container_name: usst_website_agent
     restart: always
