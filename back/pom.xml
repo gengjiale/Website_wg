@@ -11,6 +11,7 @@
     <modules>
         <module>userModule</module>
         <module>articleModule</module>
+        <module>agent</module>
     </modules>
 
     <parent>
