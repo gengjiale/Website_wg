@@ -18,7 +18,7 @@ class UserServiceTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/test/user.csv")
-    void getUserName(int id, String name) {
+    void getUserName(String id, String name) {
         assertEquals("testName", userService.getUserName(id));
 
     }

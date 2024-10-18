@@ -14,6 +14,19 @@ services:
     depends_on:
       - userModule
       - articleModule
+#      - agentModule
+
+#  agentModule:
+#    image: usst-website/agent:latest
+#    container_name: usst_website_agent
+#    restart: always
+#    networks:
+#      - website_network
+#    expose:
+#      - 8079
+#    depends_on:
+#      - nacos
+#      - mysql
 
   userModule:
     image: usst-website/user:latest
