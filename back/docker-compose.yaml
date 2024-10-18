@@ -14,7 +14,7 @@ services:
     depends_on:
       - userModule
       - articleModule
-      - agentModule
+#      - agentModule
 
 #  agentModule:
 #    image: usst-website/agent:latest
