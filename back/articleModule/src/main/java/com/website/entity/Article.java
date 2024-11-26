@@ -1,9 +1,9 @@
-package com.website.dto;
+package com.website.entity;
 
 import lombok.Data;
 
 @Data
-public class ArticleInfo {
+public class Article {
     String id; // id
     int userid; // 作者id
     String title; // 标题
@@ -15,4 +15,5 @@ public class ArticleInfo {
     int like_count; // 点赞个数
     int collect_count; // 收藏个数
     int share_count; // 分享个数
+    int tag;
 }

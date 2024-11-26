@@ -4,13 +4,30 @@
     <resultMap id="UserMap" type="com.website.entity.User" >
         <id column="id" property="id"/>
         <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="avatar" property="avatar"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
     </resultMap>
 
-    <select id="selectAll" resultType="user">
-        select
-            *
-        from user
+    <select id="selectUserByNameAndPassword" resultMap="UserMap">
+        select * from user where name = #{name} and password = #{password}
     </select>
 
+    <select id="selectUserById" resultMap="UserMap">
+        select * from user where id = #{id}
+    </select>
+    <select id="selectNameById" resultType="string">
+        select name from user where id = #{id}
+    </select>
+
+    <insert id="insertUserInfo">
+        insert into user (name, password, email, phone) values (#{name}, #{password}, #{email}, #{phone})
+    </insert>
+
+    <update id="updateUser">
+        update user set  name = #{name}, password = #{password}, email = #{email}, phone = #{phone}
+        where id = #{id}
+    </update>
 
 </mapper>

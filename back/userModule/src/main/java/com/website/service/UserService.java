@@ -10,20 +10,21 @@ import java.util.List;
 
 
 @Service
+@AllArgsConstructor
 public class UserService {
-    Register register = new Register();
-    Login login = new Login();
-    UserInfoService userInfoService = new UserInfoService();
-    TaskService taskService = new TaskService();
-    LikeService likeService = new LikeService();
-    CollectService collectService = new CollectService();
+    Register register;
+    Login login;
+    UserInfoService userInfoService;
+    TaskService taskService ;
+    LikeService likeService ;
+    CollectService collectService ;
 
     // 根据用户ID获取用户信息
-    public UserInfo getUserInfoById(String id){
+    public UserInfo getUserInfoById(int id){
         return userInfoService.getUserInfoById(id);
     }
     // 根据用户ID获取用户名
-    public String getUserName(String id){
+    public String getUserName(int id){
         return userInfoService.getUserName(id);
     }
     // 注册
@@ -53,40 +54,40 @@ public class UserService {
         }
     }
     // 根据用户ID更新用户信息
-    public UserInfo updateUserInfo(String id, UserInfo userInfo){
+    public UserInfo updateUserInfo(int id, UserInfo userInfo){
         return userInfoService.updateUserInfo(id, userInfo);
     }
     // 根据用户ID获取用户的任务列表
-    public List<TaskInfo> getAllTask(String id){
+    public List<TaskInfo> getAllTask(int id){
         return taskService.getAllTask(id);
     }
     // 完成任务
-    public TaskInfo completeTask(String userid, String taskid){
+    public TaskInfo completeTask(int userid, String taskid){
         return taskService.completeTask(userid, taskid);
     }
     // 根据用户ID获取点赞列表
-    public List<ArticleInfo> getLikeList(String id){
+    public List<ArticleInfo> getLikeList(int id){
         return likeService.getLikeList(id);
     }
     // 点赞文章
-    public ArticleInfo likeArticle(String userid,String articleid){
+    public ArticleInfo likeArticle(int userid,String articleid){
         return likeService.likeArticle(userid, articleid);
     }
     // 取消点赞
-    public void cancelLike(String userid,String articleid){
+    public void cancelLike(int userid,String articleid){
         likeService.cancelLike(userid, articleid);
     }
     // 根据用户ID获取收藏列表
-    public List<ArticleInfo> getCollectionList(String userid){
-        return collectService.getCollectionList(userid);
+    public List<ArticleInfo> getCollectionList(int userid){
+        return collectService.getCollectList(userid);
     }
     // 收藏文章
-    public ArticleInfo saveArticle(String userid,String articleid){
-        return collectService.saveArticle(userid, articleid);
+    public ArticleInfo saveArticle(int userid,String articleid){
+        return collectService.collectArticle(userid, articleid);
     }
     // 取消收藏
-    public void cancelSave(String userid,String articleid){
-        collectService.cancelSave(userid, articleid);
+    public void cancelSave(int userid,String articleid){
+        collectService.cancelCollect(userid, articleid);
     }
 
 }

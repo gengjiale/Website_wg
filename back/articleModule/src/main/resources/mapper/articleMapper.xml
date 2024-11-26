@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mapper.ArticleMapper" >
+    <resultMap id="ArticleMap" type="com.website.entity.Article" >
+        <id column="id" property="id"/>
+        <result column="userid" property="userid"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="description" property="description"/>
+        <result column="publish_time" property="publish_time"/>
+        <result column="state" property="state"/>
+        <result column="comment_count" property="comment_count"/>
+        <result column="like_count" property="like_count"/>
+        <result column="collect_count" property="collect_count"/>
+        <result column="share_count" property="share_count"/>
+    </resultMap>
+
+    <select id="selectByCurrentAndNum" resultMap="ArticleMap">
+        select * from article limit #{num} offset #{current}
+    </select>
+
+    <select id="selectById" resultMap="ArticleMap">
+        select * from article where id = #{id}
+    </select>
+
+    <select id="selectByAuthor" resultMap="ArticleMap">
+        select * from article where userid = #{userid} limit #{num} offset #{current}
+    </select>
+    <select id="selectByTag" resultMap="ArticleMap">
+        select * from article where tag = #{tag} limit #{num} offset #{current}
+    </select>
+    <select id="selectByWD" resultMap="ArticleMap">
+        select * from article where title like #{wd}
+    </select>
+
+    <insert id="insert">
+        insert into article (id, userid, title, description, content, publish_time,
+                             state, comment_count, like_count, collect_count, share_count, tag)
+        values (#{id}, #{authorId}, #{title}, #{describe}, #{content}, #{time}, "已发布",0,0,0,0, #{tag})
+    </insert>
+
+    <delete id="delete">
+        delete from article where id = #{id}
+    </delete>
+
+</mapper>

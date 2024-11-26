@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mapper.CommentMapper" >
+    <resultMap id="CommentMap" type="com.website.entity.Comment" >
+        <id column="commentid" property="commentId"/>
+        <result column="replyid" property="replyId"/>
+        <result column="comment" property="comment"/>
+        <result column="createdtime" property="createdTime"/>
+        <result column="userid" property="userId"/>
+        <result column="articleid" property="articleId"/>
+        <result column="likes" property="likes"/>
+    </resultMap>
+
+    <select id="getById" resultMap="CommentMap">
+        select * from comment where commentid = #{id}
+    </select>
+    <select id="getCommentsByArticleId" resultMap="CommentMap">
+        select * from comment where articleid = #{id}
+    </select>
+
+    <insert id="insertComment">
+        insert into comment(commentid, replyid, comment, createdtime, articleid, userid, likes)
+        values (#{commentid}, #{replyid}, #{comment}, #{createdTime}, #{articleId}, #{userId}, 0)
+    </insert>
+
+    <delete id="deleteComment">
+        delete from comment where commentid = #{id}
+    </delete>
+</mapper>

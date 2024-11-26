@@ -23,7 +23,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     @ResponseBody
-    public UserInfo getUserInfoById(@PathVariable("id") String id){
+    public UserInfo getUserInfoById(@PathVariable("id") int id){
         return userService.getUserInfoById(id);
     }
 
@@ -34,7 +34,7 @@ public class UserController {
      */
     @GetMapping("/{id}/name")
     @ResponseBody
-    public String getUserName(@PathVariable("id") String id){
+    public String getUserName(@PathVariable("id") int id){
         return userService.getUserName(id);
     }
 
@@ -74,7 +74,7 @@ public class UserController {
      */
     @PutMapping("/{id}")
     @ResponseBody
-    public UserInfo updateUserInfo(@PathVariable("id") String id, @RequestBody UserInfo userInfo){
+    public UserInfo updateUserInfo(@PathVariable("id") int id, @RequestBody UserInfo userInfo){
         return userService.updateUserInfo(id, userInfo);
     }
 
@@ -85,7 +85,7 @@ public class UserController {
      */
     @GetMapping("/{id}/task")
     @ResponseBody
-    public List<TaskInfo> getAllTask(@PathVariable("id") String id){
+    public List<TaskInfo> getAllTask(@PathVariable("id") int id){
         return userService.getAllTask(id);
     }
 
@@ -97,7 +97,7 @@ public class UserController {
      */
     @PutMapping("/{userid}/task/{taskid}")
     @ResponseBody
-    public TaskInfo completeTask(@PathVariable("userid") String userid, @PathVariable("taskid") String taskid){
+    public TaskInfo completeTask(@PathVariable("userid") int userid, @PathVariable("taskid") String taskid){
         return userService.completeTask(userid, taskid);
     }
 
@@ -108,31 +108,31 @@ public class UserController {
      */
     @GetMapping("/{id}/like")
     @ResponseBody
-    public List<ArticleInfo> getLikeList(@PathVariable("id") String id){
+    public List<ArticleInfo> getLikeList(@PathVariable("id") int id){
         return userService.getLikeList(id);
     }
 
     /**
      * 点赞文章
      * @param userid
-     * @param taskid
+     * @param articleid
      * @return
      */
     @PostMapping("/{userid}/like/{articleid}")
     @ResponseBody
-    public ArticleInfo likeArticle(@PathVariable("userid") String userid, @PathVariable("taskid") String taskid){
-        return userService.likeArticle(userid, taskid);
+    public ArticleInfo likeArticle(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+        return userService.likeArticle(userid, articleid);
     }
 
 
     /**
      * 取消点赞
      * @param userid
-     * @param taskid
+     * @param articleid
      */
     @DeleteMapping("/{userid}/like/{articleid}")
-    public void cancelLike(@PathVariable("userid") String userid, @PathVariable("taskid") String taskid){
-
+    public void cancelLike(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+        userService.cancelLike(userid, articleid);
     }
 
     /**
@@ -142,19 +142,19 @@ public class UserController {
      */
     @GetMapping("/{id}/collection")
     @ResponseBody
-    public List<ArticleInfo> getCollectionList(@PathVariable("id") String id){
+    public List<ArticleInfo> getCollectionList(@PathVariable("id") int id){
         return userService.getCollectionList(id);
     }
 
     @PostMapping("/{userid}/collection/{articleid}")
     @ResponseBody
-    public ArticleInfo saveArticle(@PathVariable("userid") String userid, @PathVariable("taskid") String taskid){
-        return userService.saveArticle(userid, taskid);
+    public ArticleInfo saveArticle(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+        return userService.saveArticle(userid, articleid);
     }
 
     @DeleteMapping("/{userid}/collection/{articleid}")
-    public void cancelSave(@PathVariable("userid") String userid, @PathVariable("taskid") String taskid){
-        userService.cancelSave(userid, taskid);
+    public void cancelSave(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+        userService.cancelSave(userid, articleid);
     }
 
 
