@@ -11,7 +11,7 @@
     <modules>
         <module>userModule</module>
         <module>articleModule</module>
-        <module>agentModule</module>
+        <module>coinsModule</module>
     </modules>
 
     <parent>

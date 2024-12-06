@@ -1,5 +1,6 @@
 package com.website.controller;
 
+
 import com.website.dto.ArticleInfo;
 import com.website.dto.CommentInfo;
 import com.website.entity.Category;
@@ -7,8 +8,17 @@ import com.website.entity.Tag;
 import com.website.service.ArticleService;
 import com.website.service.CommentService;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.nio.file.Path;
 import java.util.List;
 
 @RequestMapping("/api/v1/article")
@@ -17,6 +27,10 @@ import java.util.List;
 public class ArticleController {
     ArticleService articleService;
     CommentService commentService;
+    private ResourceLoader resourceLoader;
+    public void FileDownloadController(ResourceLoader resourceLoader){
+        this.resourceLoader = resourceLoader;
+    }
 
     /**
      * 根据文章id获取文章信息
@@ -62,6 +76,20 @@ public class ArticleController {
             return null;
         }
     }
+//    @GetMapping("/word")
+//    public void getWord() throws IOException {
+//        String filepath = "C:/Users/g'pai/Desktop/sm.docx";
+//        File file = new File(filepath);
+//        Resource resource = new UrlResource(file.toURI().toURL());
+//        if (resource.exists() || resource.isReadable()) {
+//            return ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+//                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                    .body(resource);
+//        } else {
+//            throw new RuntimeException("Could not read the file!");
+//        }
+//    }
 
     /**
      * 根据关键词搜索文章
@@ -94,6 +122,19 @@ public class ArticleController {
     public ArticleInfo publishArticle(@RequestBody ArticleInfo articleInfo){
         return articleService.insert(articleInfo.getUserid(), articleInfo.getTitle(),articleInfo.getDescription(),
                 articleInfo.getContent(), articleInfo.getTag());
+    }
+
+    @PostMapping("/word")
+    @ResponseBody
+    public String publish(@RequestParam("file") MultipartFile file){
+        try {
+            String filePath = "D:/website/articles/u1/" + file.getOriginalFilename();
+            file.transferTo(new File(filePath));
+            return "文件上传成功";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "文件上传失败";
+        }
     }
 
     /**
