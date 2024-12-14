@@ -1,7 +1,6 @@
 package com.website.service;
 
 import com.website.dto.ArticleInfo;
-import com.website.dto.TaskInfo;
 import com.website.dto.UserInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,16 +14,15 @@ public class UserService {
     Register register;
     Login login;
     UserInfoService userInfoService;
-    TaskService taskService ;
     LikeService likeService ;
     CollectService collectService ;
 
     // 根据用户ID获取用户信息
-    public UserInfo getUserInfoById(int id){
+    public UserInfo getUserInfoById(String id){
         return userInfoService.getUserInfoById(id);
     }
     // 根据用户ID获取用户名
-    public String getUserName(int id){
+    public String getUserName(String id){
         return userInfoService.getUserName(id);
     }
     // 注册
@@ -54,17 +52,15 @@ public class UserService {
         }
     }
     // 根据用户ID更新用户信息
-    public UserInfo updateUserInfo(int id, UserInfo userInfo){
+    public UserInfo updateUserInfo(String id, UserInfo userInfo){
         return userInfoService.updateUserInfo(id, userInfo);
     }
-    // 根据用户ID获取用户的任务列表
-    public List<TaskInfo> getAllTask(int id){
-        return taskService.getAllTask(id);
-    }
-    // 完成任务
-    public TaskInfo completeTask(int userid, String taskid){
-        return taskService.completeTask(userid, taskid);
-    }
+
+
+
+
+
+
     // 根据用户ID获取点赞列表
     public List<ArticleInfo> getLikeList(int id){
         return likeService.getLikeList(id);
@@ -77,6 +73,8 @@ public class UserService {
     public void cancelLike(int userid,String articleid){
         likeService.cancelLike(userid, articleid);
     }
+
+
     // 根据用户ID获取收藏列表
     public List<ArticleInfo> getCollectionList(int userid){
         return collectService.getCollectList(userid);

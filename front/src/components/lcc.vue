@@ -5,19 +5,19 @@
             <el-icon size="20" class="icon">
                 <Sunny />
             </el-icon>
-            20
+            {{ pData.likeCount }}
         </div>
         <div class="one">
             <el-icon size="20" class="icon">
                 <Star />
             </el-icon>
-            20
+            {{ pData.collectCount }}
         </div>
         <div class="one">
             <el-icon size="20" class="icon">
                 <ChatLineRound />
             </el-icon>
-            20
+            {{ pData.commentCount }}
         </div>
     </div>
 </template>
@@ -25,6 +25,9 @@
 <script>
 import {ElIcon} from 'element-plus'
 export default{
+    props:{
+        pData:{}
+    },
     components:{
         ElIcon
     }

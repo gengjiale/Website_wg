@@ -13,7 +13,7 @@
                 Username
                 </div>
             </template>
-            kooriookami
+            {{ this.$store.state.user.name }}
         </el-descriptions-item>
         <el-descriptions-item>
         <template #label>
@@ -24,7 +24,7 @@
             Telephone
             </div>
         </template>
-        18100000000
+        12345678900
         </el-descriptions-item>
     </el-descriptions>
 </template>

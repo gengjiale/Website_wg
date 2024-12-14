@@ -4,12 +4,13 @@ import lombok.Data;
 
 @Data
 public class Condition {
+    int id;
     String name;
-    String current_price;
-    String price_change_24h;
-    String volume_24h;
+    Double current_price;
+    Double price_change_24h;
+    Double volume_24h;
     String market_cap;
-    String global_index;
+    int global_index;
     String circulating_supply;
-    String turnover_24h;
+    Double turnover_24h;
 }

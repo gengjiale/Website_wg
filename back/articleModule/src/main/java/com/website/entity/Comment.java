@@ -6,10 +6,9 @@ import lombok.Data;
 public class Comment {
     String commentId;
     String replyId;
-
-    String comment;
+    String content;
     String createdTime;
-    int userId;
+    String userId;
     String articleId;
-    int likes;
+    int likeCount;
 }

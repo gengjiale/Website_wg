@@ -3,125 +3,45 @@ import Mock from 'mockjs'
 Mock.mock('http://localhost/api/v1/article?current=0$num=10','get',
     [
         {
-            'id':'1',
-            'title':'11111111',
-            'userid':'3',
-            'author':'44444',
-            'description':'55555555555555555555555555555555555555555555555555555555555555555555',
-            'publish_time':'2024-12-1',
-            'comment_count':'10',
-            'like_count':'11',
-            'collect_count':'5',
-            'share_count':'10',
-            'tag':[
-                '111',
-                '222',
-                '333'
+            'articleId':'a1733765119901',
+            'userId':'u1733765119901',
+            'title':'投资反思：如果我真这么聪明，为什么会错过XRP',
+            'description':'在高波动市场中最小化遗憾的投资心理学。',
+            'publishTime':'2024-12-10-01-25-20',
+            'commentCount':'10',
+            'likeCount':'11',
+            'collectCount':'5',
+
+            'picture':"D:/websitedata/articles/u1733765119901/a1733765119901/Snipaste_2023-07-23_18-34-38.png",
+            'content':"D:/websitedata/articles/u1733765119901/a1733765119901/a1733765119901.docx",
+
+            'userName':'test',
+            'tagList':[
+                '反思',
+                '遗憾',
+                '折磨',
+                "代币"
             ]
         },
         {
-            'id':'2',
-            'title':'222222',
-            'userid':'3',
-            'author':'44444',
-            'description':'55555555555555555555555555555555555555555555555555555555555555555555',
-            'publish_time':'2024-12-1',
-            'comment_count':'10',
-            'like_count':'11',
-            'collect_count':'5',
-            'share_count':'10',
-            'tag':[
-                '111',
-                '222',
-                '333'
-            ],
-            'picture':[
-                'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-                // 'p-a2-1'
-            ]
-        },
-        {
-            'id':'3',
-            'title':'222222',
-            'userid':'3',
-            'author':'44444',
-            'description':'55555555555555555555555555555555555555555555555555555555555555555555',
-            'publish_time':'2024-12-1',
-            'comment_count':'10',
-            'like_count':'11',
-            'collect_count':'5',
-            'share_count':'10',
-            'tag':[
-                '111',
-                '222',
-                '333'
-            ],
-            'picture':[
-                'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-                // 'p-a2-1'
-            ]
-        },
-        {
-            'id':'4',
-            'title':'222222',
-            'userid':'3',
-            'author':'44444',
-            'description':'55555555555555555555555555555555555555555555555555555555555555555555',
-            'publish_time':'2024-12-1',
-            'comment_count':'10',
-            'like_count':'11',
-            'collect_count':'5',
-            'share_count':'10',
-            'tag':[
-                '111',
-                '222',
-                '333'
-            ],
-            'picture':[
-                'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-                // 'p-a2-1'
-            ]
-        },
-        {
-            'id':'5',
-            'title':'222222',
-            'userid':'3',
-            'author':'44444',
-            'description':'55555555555555555555555555555555555555555555555555555555555555555555',
-            'publish_time':'2024-12-1',
-            'comment_count':'10',
-            'like_count':'11',
-            'collect_count':'5',
-            'share_count':'10',
-            'tag':[
-                '111',
-                '222',
-                '333'
-            ],
-            'picture':[
-                'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-                // 'p-a2-1'
-            ]
-        },
-        {
-            'id':'6',
-            'title':'222222',
-            'userid':'3',
-            'author':'44444',
-            'description':'55555555555555555555555555555555555555555555555555555555555555555555',
-            'publish_time':'2024-12-1',
-            'comment_count':'10',
-            'like_count':'11',
-            'collect_count':'5',
-            'share_count':'10',
-            'tag':[
-                '111',
-                '222',
-                '333'
-            ],
-            'picture':[
-                'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-                // 'p-a2-1'
+            'articleId':'a1733765119901',
+            'userId':'u1733765119901',
+            'title':'投资反思：如果我真这么聪明，为什么会错过XRP',
+            'description':'在高波动市场中最小化遗憾的投资心理学。',
+            'publishTime':'2024-12-10-01-25-20',
+            'commentCount':'10',
+            'likeCount':'11',
+            'collectCount':'5',
+
+            'picture':"D:/websitedata/articles/u1733765119901/a1733765119901/Snipaste_2023-07-23_18-34-38.png",
+            'content':"D:/websitedata/articles/u1733765119901/a1733765119901/a1733765119901.docx",
+
+            'userName':'test',
+            'tagList':[
+                '反思',
+                '遗憾',
+                '折磨',
+                "代币"
             ]
         }
     ]

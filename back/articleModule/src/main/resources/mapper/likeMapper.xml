@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.website.mapper.LikeMapper" >
-
-    <select id="selectArticleIdListByUserId" resultType="string">
-        select articleid from likes where userid = #{id};
+    <resultMap id="LikeMap" type="com.website.entity.Like">
+        <result column="userid" property="userId"/>
+        <result column="articleid" property="articleId"/>
+    </resultMap>
+    <select id="selectArticleIdsByUserId" resultType="string">
+        select articleid from likes where userid = #{userId};
     </select>
 
+    <select id="selectByArticleIdAndUserId" resultMap="LikeMap">
+        select * from likes where articleid = #{articleId} and userid = #{userId}
+    </select>
+
+
     <insert id="insert">
-        insert into likes (userid, articleid) values (#{userid}, #{articleid})
+        insert into likes (userid, articleid) values (#{userId}, #{articleId});
     </insert>
 
+
     <delete id="delete">
-        delete from likes where userid = #{userid} and articleid = #{articleid}
+        delete from likes where userid = #{userId} and articleid = #{articleId};
     </delete>
 </mapper>

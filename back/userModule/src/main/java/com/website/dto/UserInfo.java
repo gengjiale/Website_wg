@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserInfo {
-    int id;
+    String userId;
     String name;
     String password;
     Byte[] avatar;

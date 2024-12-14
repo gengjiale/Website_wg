@@ -14,7 +14,7 @@ public class UserInfoService {
 
     UserInfo setUserToUserInfo(User user){
         UserInfo userInfo = new UserInfo();
-        userInfo.setId(user.getId());
+        userInfo.setUserId(user.getUserId());
         userInfo.setName(user.getName());
         userInfo.setPassword(user.getPassword());
         userInfo.setEmail(user.getEmail());
@@ -27,7 +27,7 @@ public class UserInfoService {
      * @param id
      * @return
      */
-    public UserInfo getUserInfoById(int id){
+    public UserInfo getUserInfoById(String id){
         User user = userMapper.selectUserById(id);
         if(user == null) return null;
         else{
@@ -35,12 +35,12 @@ public class UserInfoService {
         }
     }
 
-    public String getUserName(int id){
+    public String getUserName(String id){
         return userMapper.selectNameById(id);
     }
 
-    public UserInfo updateUserInfo(int id, UserInfo userInfo){
-        int i = userMapper.updateUser(id, userInfo.getName(), userInfo.getPassword(), userInfo.getEmail(), userInfo.getPhone());
+    public UserInfo updateUserInfo(String id, UserInfo userInfo){
+        int i = userMapper.updateUser(id, userInfo.getName(), userInfo.getPassword());
         if ( i > 0) return userInfo;
         else return null;
     }

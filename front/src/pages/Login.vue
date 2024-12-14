@@ -1,32 +1,36 @@
 <!-- /login 登录 -->
 <template>
-    <el-form :model="form" label-width="auto" style="padding-top: 20px;">
-        <el-form-item label="账号">
-            <el-input v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="密码">
-            <el-input v-model="form.password"></el-input>
-        </el-form-item>
-        <el-form-item >
-            <el-button type="primary" @click="onSubmit" style="width:100%;">登录</el-button>
-        </el-form-item>
-        <el-form-item>
-            <el-divider>or</el-divider>
-        </el-form-item>
-        <el-form-item>
-            <div style="display: flex;justify-content:space-evenly;width: 100%;">
-                <div class="weixin"></div>
-                <div class="QQ"></div>
-            </div>
-        </el-form-item>
-    </el-form>
+    <div style="display: flex;justify-content: center;">
+        <el-form :model="form" label-width="auto" style="padding-top: 20px;">
+            <el-form-item label="账号">
+                <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input v-model="form.password"></el-input>
+            </el-form-item>
+            <el-form-item >
+                <el-button type="primary" @click="onSubmit" style="width:100%;">登录</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-divider>or</el-divider>
+            </el-form-item>
+            <el-form-item>
+                <div style="display: flex;justify-content:space-evenly;width: 100%;">
+                    <div class="weixin"></div>
+                    <div class="QQ"></div>
+                </div>
+            </el-form-item>
+        </el-form>
+    </div>
 </template>
 
 <script>
 import { useRoute, useRouter } from 'vue-router'
 import { ElButton,ElForm,ElFormItem,ElInput,ElDivider,ElIcon,ElMessage} from 'element-plus'
 import router from '../router';
-import {request} from '../utils/request';
+import {request,request8081,request8082} from '../utils/request';
+
+
 export default{
     components:{
         ElButton,
@@ -56,7 +60,7 @@ export default{
             request({
                 url:'/api/v1/user?name='+that.form.name+'&password='+that.form.password
             }).then(res=>{
-                if(res.data != null){
+                if(res.data != null && res.data != ''){
                     that.$store.commit('setUserid',res.data.id)
                     that.$store.commit('setUser',res.data)
                     that.router.push("/home/conditions")

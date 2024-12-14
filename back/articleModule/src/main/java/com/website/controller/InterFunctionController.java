@@ -23,7 +23,7 @@ public class InterFunctionController {
      */
     @GetMapping("/user/{id}/like")
     @ResponseBody
-    public List<ArticleInfo> getLikeList(@PathVariable("id") int id){
+    public List<ArticleInfo> getLikeList(@PathVariable("id") String id){
         return interFunction.getLikeList(id);
     }
 
@@ -35,7 +35,7 @@ public class InterFunctionController {
      */
     @PostMapping("/user/{userid}/like/{articleid}")
     @ResponseBody
-    public ArticleInfo likeArticle(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+    public ArticleInfo likeArticle(@PathVariable("userid") String userid, @PathVariable("articleid") String articleid){
         return interFunction.likeArticle(userid, articleid);
     }
 
@@ -45,7 +45,7 @@ public class InterFunctionController {
      * @param articleid
      */
     @DeleteMapping("/{userid}/like/{articleid}")
-    public void cancelLike(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+    public void cancelLike(@PathVariable("userid") String userid, @PathVariable("articleid") String articleid){
         interFunction.cancelLike(userid, articleid);
     }
 
@@ -56,7 +56,7 @@ public class InterFunctionController {
      */
     @GetMapping("/user/{id}/collect")
     @ResponseBody
-    public List<ArticleInfo> getCollectList(@PathVariable("id") int id){
+    public List<ArticleInfo> getCollectList(@PathVariable("id") String id){
         return interFunction.getCollectList(id);
     }
 
@@ -68,7 +68,7 @@ public class InterFunctionController {
      */
     @PostMapping("/user/{userid}/collect/{articleid}")
     @ResponseBody
-    public ArticleInfo collectArticle(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+    public ArticleInfo collectArticle(@PathVariable("userid") String userid, @PathVariable("articleid") String articleid){
         return interFunction.collectArticle(userid, articleid);
     }
 
@@ -78,7 +78,7 @@ public class InterFunctionController {
      * @param articleid
      */
     @DeleteMapping("/{userid}/collect/{articleid}")
-    public void cancelCollect(@PathVariable("userid") int userid, @PathVariable("articleid") String articleid){
+    public void cancelCollect(@PathVariable("userid") String userid, @PathVariable("articleid") String articleid){
         interFunction.cancelCollect(userid, articleid);
     }
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.website.mapper.UserMapper" >
     <resultMap id="UserMap" type="com.website.entity.User" >
-        <id column="id" property="id"/>
+        <id column="userid" property="userId"/>
         <result column="name" property="name"/>
         <result column="password" property="password"/>
         <result column="avatar" property="avatar"/>
@@ -15,19 +15,19 @@
     </select>
 
     <select id="selectUserById" resultMap="UserMap">
-        select * from user where id = #{id}
+        select * from user where userid = #{id}
     </select>
     <select id="selectNameById" resultType="string">
-        select name from user where id = #{id}
+        select name from user where userid = #{id}
     </select>
 
     <insert id="insertUserInfo">
-        insert into user (name, password, email, phone) values (#{name}, #{password}, #{email}, #{phone})
+        insert into user (userid, name, password) values (#{id}, #{name}, #{password})
     </insert>
 
     <update id="updateUser">
-        update user set  name = #{name}, password = #{password}, email = #{email}, phone = #{phone}
-        where id = #{id}
+        update user set  name = #{name}, password = #{password}
+        where userid = #{id}
     </update>
 
 </mapper>

@@ -15,7 +15,7 @@ public class Login {
 
     UserInfo setUserToUserInfo(User user){
         UserInfo userInfo = new UserInfo();
-        userInfo.setId(user.getId());
+        userInfo.setUserId(user.getUserId());
         userInfo.setName(user.getName());
         userInfo.setPassword(user.getPassword());
         userInfo.setEmail(user.getEmail());

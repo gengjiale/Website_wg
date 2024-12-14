@@ -2,14 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.website.mapper.TagMapper" >
     <resultMap id="TagMap" type="com.website.entity.Tag" >
-        <id column="id" property="id"/>
-        <result column="name" property="name"/>
+        <result column="articleid" property="articleId"/>
+        <result column="tag" property="tag"/>
     </resultMap>
-    <select id="getAllTags" resultMap="TagMap">
-        select * from tag
-    </select>
-    <select id="getIdByName" resultType="int">
-        select id from tag where name = #{name}
+
+    <select id="getArticleIdsByTag" resultType="string">
+        select articleid from tag where tag = #{tag};
     </select>
 
+    <select id="getArticleIdsByTagBlur" resultType="string">
+        select articleid from tag where tag like #{tag};
+    </select>
+
+    <select id="getTagsByArticleId" resultType="string">
+        select tag from tag where articleid = #{articleId};
+    </select>
+    <insert id="insert">
+        insert into tag (articleid, tag) values (#{articleId}, #{tag});
+    </insert>
+    <delete id="deleteByArticleId">
+        delete from tag where articleid = #{articleId}
+    </delete>
 </mapper>

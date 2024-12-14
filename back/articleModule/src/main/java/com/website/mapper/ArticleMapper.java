@@ -10,13 +10,21 @@ public interface ArticleMapper {
     // 查询
     Article selectById(String id); //
     List<Article> selectByCurrentAndNum(int current, int num); //
+    List<Article> selectFav();
     List<Article> selectByWD(String wd, int current, int num);
-    List<Article> selectByAuthor(int userid, int current, int num); //
-    List<Article> selectByTag(int tag, int current, int num );//
+    List<Article> selectByAuthor(String userid, int current, int num); //
 
     //增加
-    int insert(String id, int authorId, String title, String describe, String content,String time, int tag);//
+    int insert(String id, String authorId, String title, String describe, String content,String time,String picture);//
+
+    // 更新
+    void likeArticle(String articleId);
+    void cancelLike(String articleId);
+    void collectArticle(String articleId);
+    void cancelCollect(String articleId);
+    void commentArticle(String articleId);
+    void cancelComment(String articleId);
 
     //删除
-    int delete(int id);
+    int delete(String id);
 }

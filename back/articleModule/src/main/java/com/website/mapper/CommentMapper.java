@@ -12,7 +12,7 @@ public interface CommentMapper {
     Comment getById(String id); //
 
     //增加
-    int insertComment(String commentid, String replyid, String comment, String createdTime, String articleId, int userId);
+    int insertComment(String commentid, String replyid, String content, String createdTime, String articleId, String userId);
 
     //删除
     int deleteComment(String id);

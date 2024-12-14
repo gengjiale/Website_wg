@@ -15,7 +15,7 @@ public class Register {
 
     UserInfo setUserToUserInfo(User user){
         UserInfo userInfo = new UserInfo();
-        userInfo.setId(user.getId());
+        userInfo.setUserId(user.getUserId());
         userInfo.setName(user.getName());
         userInfo.setPassword(user.getPassword());
         userInfo.setEmail(user.getEmail());
@@ -29,12 +29,21 @@ public class Register {
      * @return
      */
     public UserInfo register1(UserInfo userInfo_request){
-        int i = userMapper.insertUserInfo(userInfo_request.getName(),
-                userInfo_request.getPassword(), userInfo_request.getEmail(), userInfo_request.getPhone());
-        if(i > 0){
-            return userInfo_request;
-        }else{
+        String name = userInfo_request.getName();
+        String password = userInfo_request.getPassword();
+        User user = userMapper.selectUserByNameAndPassword(name, password);
+        if(user != null){
             return null;
+        }else{
+            long currentTimeMillis = System.currentTimeMillis();
+            String id = "u" + currentTimeMillis;
+            int i = userMapper.insertUserInfo(id,userInfo_request.getName(), userInfo_request.getPassword());
+            if(i > 0){
+                userInfo_request.setUserId(id);
+                return userInfo_request;
+            }else{
+                return null;
+            }
         }
     }
 

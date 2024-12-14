@@ -5,6 +5,7 @@ import com.website.entity.Article;
 import com.website.mapper.ArticleMapper;
 import com.website.mapper.CollectMapper;
 import com.website.mapper.LikeMapper;
+import com.website.mapper.TagMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,51 +20,57 @@ public class InterFunction {
     ArticleMapper articleMapper;
     ArticleService articleService;
 
-    public List<ArticleInfo> getLikeList(int id){
-        List<String> list = likeMapper.selectArticleIdListByUserId(id);
+    TagMapper tagMapper;
+
+    public List<ArticleInfo> getLikeList(String id){
+        List<String> list = likeMapper.selectArticleIdsByUserId(id);
         List<ArticleInfo> articleInfoList = new ArrayList<>();
         for (int i = 0; i < list.size() ; i++){
             Article article = articleMapper.selectById(list.get(i));
-            articleInfoList.add(articleService.setArticleToArticleInfo(article));
+            List<String> tagList = tagMapper.getTagsByArticleId(article.getArticleId());
+            articleInfoList.add(articleService.setArticleToArticleInfo(article,tagList));
         }
         return articleInfoList;
     }
 
-    public ArticleInfo likeArticle(int userid, String articleId){
+    public ArticleInfo likeArticle(String userid, String articleId){
         int i = likeMapper.insert(userid, articleId);
         if (i > 0){;
             Article article = articleMapper.selectById(articleId);
-            return articleService.setArticleToArticleInfo(article);
+            List<String> tagList = tagMapper.getTagsByArticleId(article.getArticleId());
+            return articleService.setArticleToArticleInfo(article, tagList);
         }else{
             return null;
         }
     }
 
-    public void cancelLike(int userid, String articleId){
+    public void cancelLike(String userid, String articleId){
         likeMapper.delete(userid,articleId);
     }
 
-    public List<ArticleInfo> getCollectList(int id){
+    public List<ArticleInfo> getCollectList(String id){
         List<String> list = collectMapper.selectArticleIdListByUserId(id);
         List<ArticleInfo> articleInfoList = new ArrayList<>();
         for (int i = 0; i < list.size() ; i++){
             Article article = articleMapper.selectById(list.get(i));
-            articleInfoList.add(articleService.setArticleToArticleInfo(article));
+            List<String> tagList = tagMapper.getTagsByArticleId(article.getArticleId());
+            articleInfoList.add(articleService.setArticleToArticleInfo(article, tagList));
         }
         return articleInfoList;
     }
 
-    public ArticleInfo collectArticle(int userid, String articleId){
+    public ArticleInfo collectArticle(String userid, String articleId){
         int i = collectMapper.insert(userid, articleId);
         if (i > 0){;
             Article article = articleMapper.selectById(articleId);
-            return articleService.setArticleToArticleInfo(article);
+            List<String> tagList = tagMapper.getTagsByArticleId(article.getArticleId());
+            return articleService.setArticleToArticleInfo(article, tagList);
         }else{
             return null;
         }
     }
 
-    public void cancelCollect(int userid, String articleId){
+    public void cancelCollect(String userid, String articleId){
         collectMapper.delete(userid,articleId);
     }
 

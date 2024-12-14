@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
     // 查询
     User selectUserByNameAndPassword(String name, String password); //
-    User selectUserById(int id); //
-    String selectNameById(int id);
+    User selectUserById(String id); //
+    String selectNameById(String id);
 
     // 增加
-    int insertUserInfo(String name, String password, String email, String phone); //
+    int insertUserInfo(String id, String name, String password); //
 
     //更新
-    int updateUser(int id, String name, String password, String email, String phone);
+    int updateUser(String id, String name, String password);
 
 }

@@ -1,7 +1,6 @@
 package com.website.controller;
 
 import com.website.dto.ArticleInfo;
-import com.website.dto.TaskInfo;
 import com.website.dto.UserInfo;
 import com.website.service.UserService;
 import lombok.AllArgsConstructor;
@@ -23,7 +22,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     @ResponseBody
-    public UserInfo getUserInfoById(@PathVariable("id") int id){
+    public UserInfo getUserInfoById(@PathVariable("id") String id){
         return userService.getUserInfoById(id);
     }
 
@@ -34,7 +33,7 @@ public class UserController {
      */
     @GetMapping("/{id}/name")
     @ResponseBody
-    public String getUserName(@PathVariable("id") int id){
+    public String getUserName(@PathVariable("id") String id){
         return userService.getUserName(id);
     }
 
@@ -74,32 +73,11 @@ public class UserController {
      */
     @PutMapping("/{id}")
     @ResponseBody
-    public UserInfo updateUserInfo(@PathVariable("id") int id, @RequestBody UserInfo userInfo){
+    public UserInfo updateUserInfo(@PathVariable("id") String id, @RequestBody UserInfo userInfo){
         return userService.updateUserInfo(id, userInfo);
     }
 
-    /**
-     * 根据用户ID获取任务列表
-     * @param id
-     * @return
-     */
-    @GetMapping("/{id}/task")
-    @ResponseBody
-    public List<TaskInfo> getAllTask(@PathVariable("id") int id){
-        return userService.getAllTask(id);
-    }
 
-    /**
-     * 完成任务。
-     * @param userid
-     * @param taskid
-     * @return
-     */
-    @PutMapping("/{userid}/task/{taskid}")
-    @ResponseBody
-    public TaskInfo completeTask(@PathVariable("userid") int userid, @PathVariable("taskid") String taskid){
-        return userService.completeTask(userid, taskid);
-    }
 
     /**
      * 根据用户ID获取点赞文章列表

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.website.mapper.CollectMapper" >
+    <resultMap id="CollectMap" type="com.website.entity.Collect">
+        <result column="userid" property="userId"/>
+        <result column="articleid" property="articleId"/>
+    </resultMap>
 
     <select id="selectArticleIdListByUserId" resultType="string">
         select articleid from collect where userid = #{id}
+    </select>
+    <select id="selectByArticleIdAndUserId" resultMap="CollectMap">
+        select * from collect where articleid = #{articleId} and userid = #{userId}
     </select>
     <insert id="insert">
         insert into collect (userid, articleid) values (#{userid}, #{articleid})

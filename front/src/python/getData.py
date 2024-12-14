@@ -1,5 +1,6 @@
 import requests
 import json
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 def get_crypto_data(coin_id):
     url = f"https://api.coingecko.com/api/v3/coins/{coin_id}"
@@ -35,25 +36,31 @@ def get_crypto_data(coin_id):
         '24h_turnover': turnover,
     }
 
-coins = [
-    'bitcoin',
-    'ethereum',
-    'litecoin',
-    'ripple',
-    'chainlink',
-    'polkadot',
-    'cardano',
-    'solana',
-    'dogecoin',
-    'shiba-inu'
-]
-# with open('D:/websitedata/coins.txt', 'w', encoding='utf-8') as file:
-#     file.write('')
-for item in coins:
-    with open('D:/websitedata/coins/'+ item +'.txt', 'w', encoding='utf-8') as file:
-        result = get_crypto_data(item)
-        print(result)
-        json.dump(result, file, ensure_ascii=False, indent=4)
+
+def save():
+    coins = [
+        'bitcoin',
+        'ethereum',
+        'litecoin',
+        'ripple',
+        'chainlink',
+        'polkadot',
+        'cardano',
+        'solana',
+        'dogecoin',
+        'shiba-inu'
+    ]
+    for item in coins:
+        with open('D:/websitedata/coins/' + item + '.txt', 'w', encoding='utf-8') as file:
+            result = get_crypto_data(item)
+            print(result)
+            json.dump(result, file, ensure_ascii=False, indent=4)
+
+
+save()
+# scheduler = BlockingScheduler()
+# scheduler.add_job(save, 'interval', minutes=1)
+# scheduler.start()
 
 
 

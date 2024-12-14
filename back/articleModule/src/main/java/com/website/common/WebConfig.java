@@ -16,9 +16,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 假设你的.docx文件存放在D:/docs/目录下
-        registry.addResourceHandler("/api/v1/article/word/**").addResourceLocations("file:D:/website/articles/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        // 假设你的.docx文件存放在D:/docs/目录下
+//        registry.addResourceHandler("/api/v1/article/word/**").addResourceLocations("file:D:/website/articles/");
+//    }
 }

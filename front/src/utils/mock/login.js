@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 // 用户名密码登录成功
 Mock.mock('http://localhost/api/v1/user?name=test&password=123456','get',{
     'name': 'test',
-    'id': '1',
+    'id': 'u1733765119901',
     'password': '123456',
     
 })

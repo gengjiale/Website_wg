@@ -4,6 +4,7 @@ import com.website.dto.ArticleInfo;
 import com.website.dto.CommentInfo;
 import com.website.entity.Article;
 import com.website.entity.Comment;
+import com.website.mapper.ArticleMapper;
 import com.website.mapper.CommentMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -20,6 +21,7 @@ import java.util.Map;
 @Service
 @AllArgsConstructor
 public class CommentService {
+    ArticleMapper articleMapper;
     CommentMapper commentMapper;
     private RestTemplate restTemplate;
 
@@ -27,19 +29,17 @@ public class CommentService {
         restTemplate = new RestTemplate(new SimpleClientHttpRequestFactory());
         CommentInfo commentInfo = new CommentInfo();
         commentInfo.setCommentId(comment.getCommentId());
-
-        commentInfo.setComment(comment.getComment());
+        commentInfo.setReplyId(commentInfo.getReplyId());
+        commentInfo.setContent(comment.getContent());
         commentInfo.setCreatedTime(comment.getCreatedTime());
-        commentInfo.setUserid(comment.getUserId());
+        commentInfo.setUserId(comment.getUserId());
+        commentInfo.setArticleId(comment.getArticleId());
+
         String url = "http://localhost:8081/api/v1/user/"+comment.getUserId()+"/name";
         String name = restTemplate.getForObject(url, String.class);
         commentInfo.setUserName(name);
-        commentInfo.setArticleId(comment.getArticleId());
 
-        commentInfo.setAuthor(commentInfo.getUserName());
-        commentInfo.setDate(commentInfo.getCreatedTime());
-        commentInfo.setContent(commentInfo.getComment());
-        commentInfo.setId(comment.getCommentId());
+
         return commentInfo;
     }
 
@@ -90,7 +90,7 @@ public class CommentService {
      * @param userId
      * @return
      */
-    public CommentInfo insertComment(String pid, String comment, String articleId, int userId){
+    public CommentInfo insertComment(String pid, String comment, String articleId, String userId){
         long currentTimeMillis = System.currentTimeMillis();
         String id = "c" + currentTimeMillis;
         LocalDateTime now = LocalDateTime.now();
@@ -98,6 +98,7 @@ public class CommentService {
         String formattedDateTime = now.format(formatter);
         int i = commentMapper.insertComment(id, pid, comment, formattedDateTime, articleId, userId);
         if(i > 0){
+            articleMapper.commentArticle(articleId);
             return setCommentToCommentInfo(commentMapper.getById(id));
         }else {
             return null;

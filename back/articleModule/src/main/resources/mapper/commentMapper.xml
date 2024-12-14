@@ -4,11 +4,11 @@
     <resultMap id="CommentMap" type="com.website.entity.Comment" >
         <id column="commentid" property="commentId"/>
         <result column="replyid" property="replyId"/>
-        <result column="comment" property="comment"/>
+        <result column="content" property="content"/>
         <result column="createdtime" property="createdTime"/>
         <result column="userid" property="userId"/>
         <result column="articleid" property="articleId"/>
-        <result column="likes" property="likes"/>
+        <result column="like_count" property="likeCount"/>
     </resultMap>
 
     <select id="getById" resultMap="CommentMap">
@@ -19,8 +19,8 @@
     </select>
 
     <insert id="insertComment">
-        insert into comment(commentid, replyid, comment, createdtime, articleid, userid, likes)
-        values (#{commentid}, #{replyid}, #{comment}, #{createdTime}, #{articleId}, #{userId}, 0)
+        insert into comment(commentid, replyid, content, createdtime, articleid, userid, like_count)
+        values (#{commentid}, #{replyid}, #{content}, #{createdTime}, #{articleId}, #{userId}, 0)
     </insert>
 
     <delete id="deleteComment">

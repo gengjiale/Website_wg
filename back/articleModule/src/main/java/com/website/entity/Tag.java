@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Tag {
-    int id;
-    String name;
+    String articleId;
+    String tag;
 }

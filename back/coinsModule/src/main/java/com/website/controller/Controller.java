@@ -48,14 +48,15 @@ public class Controller {
                 // 将字符串解析为JSONObject
                 JSONObject jsonObject = new JSONObject(jsonContent);
                 Condition condition = new Condition();
+                condition.setId(i);
                 condition.setName(coins[i]);
                 condition.setCirculating_supply(jsonObject.getString("circulating_supply"));
-                condition.setGlobal_index(jsonObject.getString("global_index"));
-                condition.setCurrent_price(jsonObject.getString("current_price"));
+                condition.setGlobal_index(jsonObject.getInt("global_index"));
+                condition.setCurrent_price(jsonObject.getDouble("current_price"));
                 condition.setMarket_cap(jsonObject.getString("market_cap"));
-                condition.setTurnover_24h(jsonObject.getString("24h_turnover"));
-                condition.setVolume_24h(jsonObject.getString("volume_24h"));
-                condition.setPrice_change_24h(jsonObject.getString("price_change_24h"));
+                condition.setTurnover_24h(jsonObject.getDouble("24h_turnover"));
+                condition.setVolume_24h(jsonObject.getDouble("volume_24h"));
+                condition.setPrice_change_24h(jsonObject.getDouble("price_change_24h"));
                 conditions.add(condition);
             } catch (IOException e) {
                 throw new RuntimeException(e);
